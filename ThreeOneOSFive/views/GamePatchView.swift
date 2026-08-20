@@ -103,7 +103,9 @@ enum AimPatchPreset: String, CaseIterable, Identifiable {
 
 @MainActor
 final class FFTHPatchController: ObservableObject {
-    @Published private(set) var enabled: [AimPatchPreset: Bool] = [:]
+    // Keep each switch as an independent value. A Set makes the relationship
+    // explicit: changing one preset can only insert/remove that preset.
+    @Published private(set) var enabled = Set<AimPatchPreset>()
     @Published private(set) var busyPreset: AimPatchPreset?
     @Published var errorMessage: String?
 
@@ -157,7 +159,7 @@ final class FFTHPatchController: ObservableObject {
     }
 
     func isEnabled(_ preset: AimPatchPreset) -> Bool {
-        enabled[preset] ?? false
+        enabled.contains(preset)
     }
 
     func setEnabled(_ value: Bool, for preset: AimPatchPreset) {
@@ -181,7 +183,11 @@ final class FFTHPatchController: ObservableObject {
                         try DevicePatchService.restore(receipt: receipt)
                     }.value
                 }
-                enabled[preset] = value
+                if value {
+                    enabled.insert(preset)
+                } else {
+                    enabled.remove(preset)
+                }
                 busyPreset = nil
             } catch let error as PatchPackageError {
                 busyPreset = nil
@@ -199,9 +205,13 @@ final class FFTHPatchController: ObservableObject {
     }
 
     private func syncEnabledState() {
-        enabled = Dictionary(uniqueKeysWithValues: AimPatchPreset.allCases.map { preset in
-            (preset, DevicePatchService.latestReceipt(projectID: item(for: preset)?.id ?? UUID()) != nil)
-        })
+        enabled = Set(
+            AimPatchPreset.allCases.filter { preset in
+                DevicePatchService.latestReceipt(
+                    projectID: item(for: preset)?.id ?? UUID()
+                ) != nil
+            }
+        )
     }
 
     private func loadPackageIDs() {
