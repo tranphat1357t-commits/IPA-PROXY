@@ -28,34 +28,41 @@ enum SupportedGame: String, Identifiable {
     }
 }
 
-enum FFTHPatchPreset: String, CaseIterable, Identifiable {
-    case body
-    case drag
-    case neck
+enum AimPatchPreset: String, CaseIterable, Identifiable {
+    case ffthChest
+    case ffmBody
+    case ffmChest
+    case ffmNeck
+    case ffmDrag
 
     var id: String { rawValue }
 
     var title: String {
         switch self {
-        case .body: return "Proxy Body"
-        case .drag: return "Proxy Drag"
-        case .neck: return "Proxy Neck"
+        case .ffthChest: return "Aim Chest Free Fire.3105"
+        case .ffmBody: return "Aim Body Free Fire Max.3105"
+        case .ffmChest: return "Aim Chest Free Fire Max.3105"
+        case .ffmNeck: return "Aim Cổ Free Fire Max.3105"
+        case .ffmDrag: return "Aim Drag Free Fire Max.3105"
         }
     }
 
     var detail: String {
         switch self {
-        case .body: return "Aim vào phần thân"
-        case .drag: return "Hỗ trợ kéo tâm lên đầu"
-        case .neck: return "Aim ưu tiên vùng cổ"
+        case .ffthChest: return "Aim ưu tiên vùng ngực cho Free Fire TH"
+        case .ffmBody: return "Aim ưu tiên phần thân cho Free Fire Max"
+        case .ffmChest: return "Aim ưu tiên vùng ngực cho Free Fire Max"
+        case .ffmNeck: return "Aim ưu tiên vùng cổ cho Free Fire Max"
+        case .ffmDrag: return "Hỗ trợ kéo tâm cho Free Fire Max"
         }
     }
 
     var icon: String {
         switch self {
-        case .body: return "figure.stand"
-        case .drag: return "arrow.up.right"
-        case .neck: return "scope"
+        case .ffthChest, .ffmChest: return "scope"
+        case .ffmBody: return "figure.stand"
+        case .ffmDrag: return "arrow.up.right"
+        case .ffmNeck: return "scope"
         }
     }
 
@@ -63,23 +70,32 @@ enum FFTHPatchPreset: String, CaseIterable, Identifiable {
     // future FFTH package can be replaced without changing the UI.
     var resourceName: String {
         switch self {
-        case .body: return "Aim_Body_Free_Fire_1787211276881"
-        case .drag: return "Aim_Drag_Free_Fire_1787211276882"
-        case .neck: return "Aim_Neck_Free_Fire_1787211276883"
+        case .ffthChest: return "Aim_Chest_Free_Fire_3105"
+        case .ffmBody: return "Aim_Body_Free_Fire_Max_3105"
+        case .ffmChest: return "Aim_Chest_Free_Fire_Max_3105"
+        case .ffmNeck: return "Aim_Co_Free_Fire_Max_3105"
+        case .ffmDrag: return "Aim_Drag_Free_Fire_Max_3105"
+        }
+    }
+
+    var game: SupportedGame {
+        switch self {
+        case .ffthChest: return .ffth
+        case .ffmBody, .ffmChest, .ffmNeck, .ffmDrag: return .ffm
         }
     }
 }
 
 @MainActor
 final class FFTHPatchController: ObservableObject {
-    @Published private(set) var enabled: [FFTHPatchPreset: Bool] = [:]
-    @Published private(set) var busyPreset: FFTHPatchPreset?
+    @Published private(set) var enabled: [AimPatchPreset: Bool] = [:]
+    @Published private(set) var busyPreset: AimPatchPreset?
     @Published var errorMessage: String?
 
     private static let installedKey = "ffth.bundledPatchesInstalled.v1"
     private static let idsKey = "ffth.bundledPatchIDs.v1"
     private let fileManager = FileManager.default
-    private var packageIDs: [FFTHPatchPreset: UUID] = [:]
+    private var packageIDs: [AimPatchPreset: UUID] = [:]
 
     func prepare() {
         guard !UserDefaults.standard.bool(forKey: Self.installedKey) else {
@@ -90,7 +106,7 @@ final class FFTHPatchController: ObservableObject {
 
         busyPreset = nil
         do {
-            for preset in FFTHPatchPreset.allCases {
+            for preset in AimPatchPreset.allCases {
                 guard let sourceURL = Bundle.main.url(
                     forResource: preset.resourceName,
                     withExtension: "3105"
@@ -120,16 +136,16 @@ final class FFTHPatchController: ObservableObject {
             UserDefaults.standard.set(true, forKey: Self.installedKey)
             syncEnabledState()
         } catch {
-            errorMessage = "Không thể nạp bộ patch FFTH vào thư viện."
-            log("ffth: bundled patch import failed: \(error)")
+            errorMessage = "Không thể nạp bộ aim vào thư viện."
+            log("aim: bundled patch import failed: \(error)")
         }
     }
 
-    func isEnabled(_ preset: FFTHPatchPreset) -> Bool {
+    func isEnabled(_ preset: AimPatchPreset) -> Bool {
         enabled[preset] ?? false
     }
 
-    func setEnabled(_ value: Bool, for preset: FFTHPatchPreset) {
+    func setEnabled(_ value: Bool, for preset: AimPatchPreset) {
         guard busyPreset == nil else { return }
         busyPreset = preset
 
@@ -162,20 +178,20 @@ final class FFTHPatchController: ObservableObject {
         }
     }
 
-    private func item(for preset: FFTHPatchPreset) -> PatchLibraryItem? {
+    private func item(for preset: AimPatchPreset) -> PatchLibraryItem? {
         guard let packageID = packageIDs[preset] else { return nil }
         return PatchProjectLibrary.load().first { $0.id == packageID }
     }
 
     private func syncEnabledState() {
-        enabled = Dictionary(uniqueKeysWithValues: FFTHPatchPreset.allCases.map { preset in
+        enabled = Dictionary(uniqueKeysWithValues: AimPatchPreset.allCases.map { preset in
             (preset, DevicePatchService.latestReceipt(projectID: item(for: preset)?.id ?? UUID()) != nil)
         })
     }
 
     private func loadPackageIDs() {
         let values = UserDefaults.standard.dictionary(forKey: Self.idsKey) as? [String: String] ?? [:]
-        packageIDs = Dictionary(uniqueKeysWithValues: FFTHPatchPreset.allCases.compactMap { preset in
+        packageIDs = Dictionary(uniqueKeysWithValues: AimPatchPreset.allCases.compactMap { preset in
             guard let rawID = values[preset.rawValue], let id = UUID(uuidString: rawID) else {
                 return nil
             }
@@ -198,14 +214,14 @@ struct GameSelectionView: View {
                 NavigationLink {
                     GamePatchView(game: .ffth)
                 } label: {
-                    GameCard(game: .ffth, status: "FFTH đã sẵn sàng")
+                    GameCard(game: .ffth, status: "Free Fire TH")
                 }
                 .buttonStyle(.plain)
 
                 NavigationLink {
                     GamePatchView(game: .ffm)
                 } label: {
-                    GameCard(game: .ffm, status: "Đang chờ bộ file")
+                    GameCard(game: .ffm, status: "Free Fire Max")
                 }
                 .buttonStyle(.plain)
             }
@@ -281,32 +297,31 @@ struct GamePatchView: View {
                 .padding(.vertical, 14)
             }
 
-            if game == .ffth {
-                Section {
-                    ForEach(FFTHPatchPreset.allCases) { preset in
-                        Toggle(isOn: Binding(
-                            get: { controller.isEnabled(preset) },
-                            set: { controller.setEnabled($0, for: preset) }
-                        )) {
-                            HStack(spacing: 12) {
-                                Image(systemName: preset.icon)
-                                    .font(.headline)
-                                    .foregroundStyle(game.tint)
-                                    .frame(width: 28)
-                                VStack(alignment: .leading, spacing: 3) {
-                                    Text(preset.title)
-                                        .font(.body.weight(.semibold))
-                                    Text(preset.detail)
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
-                                }
+            Section {
+                ForEach(AimPatchPreset.allCases.filter { $0.game == game }) { preset in
+                    Toggle(isOn: Binding(
+                        get: { controller.isEnabled(preset) },
+                        set: { controller.setEnabled($0, for: preset) }
+                    )) {
+                        HStack(spacing: 12) {
+                            Image(systemName: preset.icon)
+                                .font(.headline)
+                                .foregroundStyle(game.tint)
+                                .frame(width: 28)
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text(preset.title)
+                                    .font(.body.weight(.semibold))
+                                Text(preset.detail)
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
                             }
                         }
-                        .disabled(controller.busyPreset != nil)
                     }
-                } header: {
+                    .disabled(controller.busyPreset != nil)
+                }
+            } header: {
                     HStack {
-                        Label("PROXY DELTA VIP", systemImage: "bolt.fill")
+                        Label("PROXY BRIAN", systemImage: "bolt.fill")
                         Spacer()
                         if controller.busyPreset != nil {
                             ProgressView().controlSize(.small)
@@ -317,24 +332,14 @@ struct GamePatchView: View {
                         }
                     }
                 } footer: {
-                    Text("Khi bật, patch tương ứng sẽ được đưa vào đường dẫn của Free Fire TH. Khi tắt, bản sao lưu gần nhất sẽ được khôi phục.")
-                }
-            } else {
-                Section {
-                    Label("Bộ file FFM chưa được thêm", systemImage: "clock")
-                        .foregroundStyle(.secondary)
-                } footer: {
-                    Text("Màn hình Free Fire Max đã sẵn sàng. Thêm bộ .3105 của FFM sau để bật các công tắc.")
-                }
+                    Text("Khi bật, cấu hình aim tương ứng sẽ được áp dụng cho game đã chọn. Khi tắt, bản sao lưu gần nhất sẽ được khôi phục.")
             }
         }
         .navigationTitle(game.title)
         .navigationBarTitleDisplayMode(.inline)
         .tint(game.tint)
         .onAppear {
-            if game == .ffth {
-                controller.prepare()
-            }
+            controller.prepare()
         }
         .alert(
             "Không thể thực hiện",

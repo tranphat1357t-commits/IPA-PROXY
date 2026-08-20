@@ -10,8 +10,14 @@ struct ContentView: View {
 #if targetEnvironment(simulator)
         let arguments = ProcessInfo.processInfo.arguments
         let initialTab: Int
-        if arguments.contains("--simulate-contact-tab") {
+        if arguments.contains("--simulate-files-tab") {
             initialTab = 1
+        } else if arguments.contains("--simulate-patch-tab") {
+            initialTab = 2
+        } else if arguments.contains("--simulate-cleaner-tab") {
+            initialTab = 3
+        } else if arguments.contains("--simulate-wallpaper-tab") {
+            initialTab = 4
         } else {
             initialTab = 0
         }
@@ -32,7 +38,7 @@ struct ContentView: View {
         .tint(AppTheme.accent)
         .imageScale(.small)
         .onAppear {
-            tabNavigation.reconcileSelection()
+            tabNavigation.reconcileSelection(with: featureVisibility)
         }
     }
 
@@ -102,9 +108,7 @@ struct ContentView: View {
         )
     }
 
-    private var featureVisibility: FeatureVisibility {
-        FeatureVisibility()
-    }
+    private var featureVisibility: FeatureVisibility { FeatureVisibility() }
 
     private var selectedVisibleSection: AppSection {
         guard let section = AppSection(rawValue: tabNavigation.selectedTab),
@@ -112,28 +116,6 @@ struct ContentView: View {
             return .home
         }
         return section
-    }
-}
-
-private struct ContactView: View {
-    var body: some View {
-        NavigationStack {
-            List {
-                Section("Liên hệ Admin") {
-                    Link(destination: URL(string: "http://zalo.me/84379957836")!) {
-                        Label("Admin Zalo", systemImage: "message.fill")
-                    }
-                    Link(destination: URL(string: "https://t.me/nguyen_quan_dz")!) {
-                        Label("Telegram: nguyen_quan_dz", systemImage: "paperplane.fill")
-                    }
-                    Link(destination: URL(string: "https://zalo.me/g/gjjxyw976")!) {
-                        Label("Box Zalo", systemImage: "person.3.fill")
-                    }
-                }
-            }
-            .navigationTitle("Liên hệ")
-            .navigationBarTitleDisplayMode(.inline)
-        }
     }
 }
 
@@ -160,14 +142,14 @@ private extension AppSection {
     var titleKey: String {
         switch self {
         case .home: return "tab.home"
-        case .contact: return "Liên hệ"
+        case .contact: return "tab.contact"
         }
     }
 
     var systemImage: String {
         switch self {
         case .home: return "house.fill"
-        case .contact: return "person.2.fill"
+        case .contact: return "person.crop.circle.fill"
         }
     }
 }

@@ -20,11 +20,11 @@ enum WallpaperFeatureSupportPolicy {
 
 struct FeatureVisibility: Equatable {
     var visibleSections: [AppSection] {
-        [.home, .contact]
+        AppSection.allCases.filter(isVisible)
     }
 
     func isVisible(_ section: AppSection) -> Bool {
-        visibleSections.contains(section)
+        true
     }
 }
 
@@ -58,9 +58,9 @@ struct AppTabNavigationState: Equatable {
         filesTabs = session
     }
 
-    mutating func reconcileSelection() {
+    mutating func reconcileSelection(with visibility: FeatureVisibility) {
         guard let selectedSection = AppSection(rawValue: selectedTab),
-              FeatureVisibility().isVisible(selectedSection) else {
+              visibility.isVisible(selectedSection) else {
             selectedTab = AppSection.home.rawValue
             return
         }

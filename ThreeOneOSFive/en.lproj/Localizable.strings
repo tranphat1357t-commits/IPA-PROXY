@@ -74,6 +74,7 @@
 "dashboard.features" = "Features";
 "dashboard.features_footer" = "Turn on Cleaner or Wallpapers to show it in the app navigation.";
 "tab.home" = "Home";
+"tab.contact" = "Contact";
 "tab.files" = "Files";
 "tab.patches" = "Patches";
 "tab.cleaner" = "Cleaner";
