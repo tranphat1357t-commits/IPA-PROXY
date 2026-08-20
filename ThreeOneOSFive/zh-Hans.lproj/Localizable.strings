@@ -14,12 +14,12 @@
 "common.finish" = "完成";
 
 "update.title" = "发现新版本";
-"update.message" = "GitHub 上已发布 3105 %@。";
+"update.message" = "GitHub 上已发布 PROXY BRIAN %@。";
 "update.agree" = "同意";
 "update.dismiss" = "不再显示";
 "patch.error.wrong_password" = "密码错误。";
 
-"attribution.title" = "关于 3105";
+"attribution.title" = "关于 PROXY BRIAN";
 "attribution.subtitle" = "项目信息";
 "attribution.link_section" = "项目链接";
 "attribution.url" = "URL";
@@ -30,18 +30,18 @@
 "onboarding.language_title" = "选择语言";
 "onboarding.language_subtitle" = "之后可在设置中更改。";
 "onboarding.language_hint" = "选择一种语言以继续。";
-"onboarding.welcome_title" = "欢迎使用 3105";
+"onboarding.welcome_title" = "欢迎使用 PROXY BRIAN";
 "onboarding.welcome_message" = "由 YangJiii 开发";
-"onboarding.welcome_badge" = "官方 3105 标识";
+"onboarding.welcome_badge" = "官方 PROXY BRIAN 标识";
 "onboarding.versions_title" = "支持的 iOS 版本";
-"onboarding.versions_subtitle" = "3105 已在下列范围内验证。不支持的版本会被阻止。";
+"onboarding.versions_subtitle" = "PROXY BRIAN 已在下列范围内验证。不支持的版本会被阻止。";
 "onboarding.versions_footer" = "本设备：iOS %@（%@）";
 "onboarding.beta" = "Beta";
 "onboarding.install_title" = "证书要求";
-"onboarding.install_message" = "3105 需要受支持的签名方式才能访问设备功能。";
+"onboarding.install_message" = "PROXY BRIAN 需要受支持的签名方式才能访问设备功能。";
 "onboarding.install_ok" = "支持企业证书，包括 eSign 和类似的企业安装方式。";
 "onboarding.install_bad" = "不支持 SideStore、AltStore、3uTools 或 LiveContainer。";
-"onboarding.install_jailbreak" = "在 iOS 17 至 iOS 18.7.1 上，如果设备已越狱，3105 将无法运行。";
+"onboarding.install_jailbreak" = "在 iOS 17 至 iOS 18.7.1 上，如果设备已越狱，PROXY BRIAN 将无法运行。";
 "onboarding.install_footer" = "继续前，请在未越狱的设备上使用受支持的证书。";
 
 "dashboard.exploit_access" = "漏洞利用权限";

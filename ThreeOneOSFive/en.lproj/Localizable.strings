@@ -14,12 +14,12 @@
 "common.finish" = "Finish";
 
 "update.title" = "Update available";
-"update.message" = "3105 %@ is available on GitHub.";
+"update.message" = "PROXY BRIAN %@ is available on GitHub.";
 "update.agree" = "OK";
 "update.dismiss" = "Don't show again";
 "patch.error.wrong_password" = "Incorrect password.";
 
-"attribution.title" = "About 3105";
+"attribution.title" = "About PROXY BRIAN";
 "attribution.subtitle" = "Project information";
 "attribution.link_section" = "Project link";
 "attribution.url" = "URL";
@@ -30,18 +30,18 @@
 "onboarding.language_title" = "Choose your language";
 "onboarding.language_subtitle" = "You can change this later in Settings.";
 "onboarding.language_hint" = "Select a language to continue.";
-"onboarding.welcome_title" = "Welcome to 3105";
+"onboarding.welcome_title" = "Welcome to PROXY BRIAN";
 "onboarding.welcome_message" = "Developed by YangJiii";
-"onboarding.welcome_badge" = "Official 3105 identity";
+"onboarding.welcome_badge" = "Official PROXY BRIAN identity";
 "onboarding.versions_title" = "Supported iOS versions";
-"onboarding.versions_subtitle" = "3105 is verified on the ranges below. Unsupported builds are blocked.";
+"onboarding.versions_subtitle" = "PROXY BRIAN is verified on the ranges below. Unsupported builds are blocked.";
 "onboarding.versions_footer" = "This device: iOS %@ (%@)";
 "onboarding.beta" = "Beta";
 "onboarding.install_title" = "Certificate requirements";
-"onboarding.install_message" = "3105 requires a supported signing method to access device features.";
+"onboarding.install_message" = "PROXY BRIAN requires a supported signing method to access device features.";
 "onboarding.install_ok" = "Works with enterprise certificates, including eSign and similar enterprise installs.";
 "onboarding.install_bad" = "Does not work with SideStore, AltStore, 3uTools or LiveContainer.";
-"onboarding.install_jailbreak" = "On iOS 17 through iOS 18.7.1, 3105 will not work if the device is jailbroken.";
+"onboarding.install_jailbreak" = "On iOS 17 through iOS 18.7.1, PROXY BRIAN will not work if the device is jailbroken.";
 "onboarding.install_footer" = "Use a supported certificate on a non-jailbroken device before continuing.";
 
 "dashboard.exploit_access" = "Exploit access";
@@ -70,7 +70,7 @@
 "dashboard.kernel_running" = "Activating…";
 "dashboard.kernel_active" = "Active";
 "dashboard.kernel_inactive" = "Inactive";
-"dashboard.enterprise_signing" = "3105 only works when signed with an enterprise certificate. SideStore, AltStore, 3uTools and LiveContainer are not supported.";
+"dashboard.enterprise_signing" = "PROXY BRIAN only works when signed with an enterprise certificate. SideStore, AltStore, 3uTools and LiveContainer are not supported.";
 "dashboard.features" = "Features";
 "dashboard.features_footer" = "Turn on Cleaner or Wallpapers to show it in the app navigation.";
 "tab.home" = "Home";

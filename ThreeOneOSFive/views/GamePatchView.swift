@@ -29,6 +29,9 @@ enum SupportedGame: String, Identifiable {
 }
 
 enum AimPatchPreset: String, CaseIterable, Identifiable {
+    case ffthBody
+    case ffthDrag
+    case ffthNeck
     case ffthChest
     case ffmBody
     case ffmChest
@@ -39,16 +42,22 @@ enum AimPatchPreset: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .ffthChest: return "Aim Chest Free Fire.3105"
-        case .ffmBody: return "Aim Body Free Fire Max.3105"
-        case .ffmChest: return "Aim Chest Free Fire Max.3105"
-        case .ffmNeck: return "Aim Cổ Free Fire Max.3105"
-        case .ffmDrag: return "Aim Drag Free Fire Max.3105"
+        case .ffthBody: return "Aim Body Free Fire"
+        case .ffthDrag: return "Aim Drag Free Fire"
+        case .ffthNeck: return "Aim Cổ Free Fire"
+        case .ffthChest: return "Aim Chest Free Fire"
+        case .ffmBody: return "Aim Body Free Fire Max"
+        case .ffmChest: return "Aim Chest Free Fire Max"
+        case .ffmNeck: return "Aim Cổ Free Fire Max"
+        case .ffmDrag: return "Aim Drag Free Fire Max"
         }
     }
 
     var detail: String {
         switch self {
+        case .ffthBody: return "Aim ưu tiên phần thân cho Free Fire TH"
+        case .ffthDrag: return "Hỗ trợ kéo tâm cho Free Fire TH"
+        case .ffthNeck: return "Aim ưu tiên vùng cổ cho Free Fire TH"
         case .ffthChest: return "Aim ưu tiên vùng ngực cho Free Fire TH"
         case .ffmBody: return "Aim ưu tiên phần thân cho Free Fire Max"
         case .ffmChest: return "Aim ưu tiên vùng ngực cho Free Fire Max"
@@ -60,6 +69,9 @@ enum AimPatchPreset: String, CaseIterable, Identifiable {
     var icon: String {
         switch self {
         case .ffthChest, .ffmChest: return "scope"
+        case .ffthBody: return "figure.stand"
+        case .ffthDrag: return "arrow.up.right"
+        case .ffthNeck: return "scope"
         case .ffmBody: return "figure.stand"
         case .ffmDrag: return "arrow.up.right"
         case .ffmNeck: return "scope"
@@ -70,6 +82,9 @@ enum AimPatchPreset: String, CaseIterable, Identifiable {
     // future FFTH package can be replaced without changing the UI.
     var resourceName: String {
         switch self {
+        case .ffthBody: return "Aim_Body_Free_Fire_1787211276881"
+        case .ffthDrag: return "Aim_Drag_Free_Fire_1787211276882"
+        case .ffthNeck: return "Aim_Neck_Free_Fire_1787211276883"
         case .ffthChest: return "Aim_Chest_Free_Fire_3105"
         case .ffmBody: return "Aim_Body_Free_Fire_Max_3105"
         case .ffmChest: return "Aim_Chest_Free_Fire_Max_3105"
@@ -80,7 +95,7 @@ enum AimPatchPreset: String, CaseIterable, Identifiable {
 
     var game: SupportedGame {
         switch self {
-        case .ffthChest: return .ffth
+        case .ffthBody, .ffthDrag, .ffthNeck, .ffthChest: return .ffth
         case .ffmBody, .ffmChest, .ffmNeck, .ffmDrag: return .ffm
         }
     }
@@ -92,8 +107,8 @@ final class FFTHPatchController: ObservableObject {
     @Published private(set) var busyPreset: AimPatchPreset?
     @Published var errorMessage: String?
 
-    private static let installedKey = "ffth.bundledPatchesInstalled.v1"
-    private static let idsKey = "ffth.bundledPatchIDs.v1"
+    private static let installedKey = "proxybrian.bundledPatchesInstalled.v3"
+    private static let idsKey = "proxybrian.bundledPatchIDs.v3"
     private let fileManager = FileManager.default
     private var packageIDs: [AimPatchPreset: UUID] = [:]
 
