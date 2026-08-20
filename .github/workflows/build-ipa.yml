@@ -1,1 +1,44 @@
+name: Build IPA
 
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macos-15
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Build archive
+        run: |
+          xcodebuild archive \
+            -project ThreeOneOSFive.xcodeproj \
+            -scheme 3105 \
+            -configuration Release \
+            -sdk iphoneos \
+            -archivePath "$RUNNER_TEMP/ThreeOneOSFive.xcarchive" \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            COMPILER_INDEX_STORE_ENABLE=NO
+
+      - name: Create IPA
+        run: |
+          mkdir -p "$RUNNER_TEMP/Payload"
+
+          cp -R "$RUNNER_TEMP/ThreeOneOSFive.xcarchive/Products/Applications/"*.app \
+            "$RUNNER_TEMP/Payload/"
+
+          cd "$RUNNER_TEMP"
+          zip -r ThreeOneOSFive-unsigned.ipa Payload
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: ThreeOneOSFive-IPA
+          path: ${{ runner.temp }}/ThreeOneOSFive-unsigned.ipa
+          if-no-files-found: error
