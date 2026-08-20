@@ -74,6 +74,7 @@
 "dashboard.features" = "功能";
 "dashboard.features_footer" = "开启清理或壁纸后，该功能才会显示在应用导航中。";
 "tab.home" = "主页";
+"tab.contact" = "联系";
 "tab.files" = "文件";
 "tab.patches" = "补丁";
 "tab.cleaner" = "清理";

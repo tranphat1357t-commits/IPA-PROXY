@@ -48,6 +48,11 @@
 3105K210 /* Aim Body FFTH */ = {isa = PBXBuildFile; fileRef = 3105K201; };
 3105K211 /* Aim Drag FFTH */ = {isa = PBXBuildFile; fileRef = 3105K202; };
 3105K212 /* Aim Neck FFTH */ = {isa = PBXBuildFile; fileRef = 3105K203; };
+        3105K213 /* Aim Chest FFTH */ = {isa = PBXBuildFile; fileRef = 3105K204; };
+        3105K214 /* Aim Body FFM */ = {isa = PBXBuildFile; fileRef = 3105K205; };
+        3105K215 /* Aim Chest FFM */ = {isa = PBXBuildFile; fileRef = 3105K206; };
+        3105K216 /* Aim Neck FFM */ = {isa = PBXBuildFile; fileRef = 3105K207; };
+        3105K217 /* Aim Drag FFM */ = {isa = PBXBuildFile; fileRef = 3105K208; };
 		3105C200 /* PatchDraftService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3105C100; };
 		3105C201 /* PatchDraftCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3105C101; };
 		3105C202 /* FolderPatchSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3105C102; };
@@ -134,6 +139,11 @@
 3105K201 /* Aim_Body_Free_Fire_1787211276881.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Aim_Body_Free_Fire_1787211276881.3105; sourceTree = "<group>"; };
 3105K202 /* Aim_Drag_Free_Fire_1787211276882.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Aim_Drag_Free_Fire_1787211276882.3105; sourceTree = "<group>"; };
 3105K203 /* Aim_Neck_Free_Fire_1787211276883.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Aim_Neck_Free_Fire_1787211276883.3105; sourceTree = "<group>"; };
+        3105K204 /* Aim_Chest_Free_Fire_3105.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Aim_Chest_Free_Fire_3105.3105; sourceTree = "<group>"; };
+        3105K205 /* Aim_Body_Free_Fire_Max_3105.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Aim_Body_Free_Fire_Max_3105.3105; sourceTree = "<group>"; };
+        3105K206 /* Aim_Chest_Free_Fire_Max_3105.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Aim_Chest_Free_Fire_Max_3105.3105; sourceTree = "<group>"; };
+        3105K207 /* Aim_Co_Free_Fire_Max_3105.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Aim_Co_Free_Fire_Max_3105.3105; sourceTree = "<group>"; };
+        3105K208 /* Aim_Drag_Free_Fire_Max_3105.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Aim_Drag_Free_Fire_Max_3105.3105; sourceTree = "<group>"; };
 		3105C100 /* PatchDraftService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchDraftService.swift; sourceTree = "<group>"; };
 		3105C101 /* PatchDraftCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchDraftCoordinator.swift; sourceTree = "<group>"; };
 		3105C102 /* FolderPatchSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderPatchSelectionView.swift; sourceTree = "<group>"; };
@@ -253,6 +263,11 @@ children = (
 3105K201 /* Aim_Body_Free_Fire_1787211276881.3105 */,
 3105K202 /* Aim_Drag_Free_Fire_1787211276882.3105 */,
 3105K203 /* Aim_Neck_Free_Fire_1787211276883.3105 */,
+        3105K204 /* Aim_Chest_Free_Fire_3105.3105 */,
+        3105K205 /* Aim_Body_Free_Fire_Max_3105.3105 */,
+        3105K206 /* Aim_Chest_Free_Fire_Max_3105.3105 */,
+        3105K207 /* Aim_Co_Free_Fire_Max_3105.3105 */,
+        3105K208 /* Aim_Drag_Free_Fire_Max_3105.3105 */,
 );
 path = FFTH;
 sourceTree = "<group>";
@@ -382,6 +397,11 @@ sourceTree = "<group>";
 3105K210 /* Aim Body FFTH */,
 3105K211 /* Aim Drag FFTH */,
 3105K212 /* Aim Neck FFTH */,
+        3105K213 /* Aim Chest FFTH */,
+        3105K214 /* Aim Body FFM */,
+        3105K215 /* Aim Chest FFM */,
+        3105K216 /* Aim Neck FFM */,
+        3105K217 /* Aim Drag FFM */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,7 +492,7 @@ sourceTree = "<group>";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ThreeOneOSFive/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = 3105;
+				INFOPLIST_KEY_CFBundleDisplayName = "PROXY BRIAN";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -486,7 +506,7 @@ sourceTree = "<group>";
 				MARKETING_VERSION = 1.1.1;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.apple.mobile.MobileHouseArrest";
-				PRODUCT_NAME = 3105;
+				PRODUCT_NAME = "PROXY BRIAN";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "ThreeOneOSFive/ThreeOneOSFive-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -506,7 +526,7 @@ sourceTree = "<group>";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ThreeOneOSFive/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = 3105;
+				INFOPLIST_KEY_CFBundleDisplayName = "PROXY BRIAN";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -520,7 +540,7 @@ sourceTree = "<group>";
 				MARKETING_VERSION = 1.1.1;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.apple.mobile.MobileHouseArrest";
-				PRODUCT_NAME = 3105;
+				PRODUCT_NAME = "PROXY BRIAN";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "ThreeOneOSFive/ThreeOneOSFive-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
